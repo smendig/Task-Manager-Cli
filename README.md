@@ -23,13 +23,8 @@ These were **considered but not implemented** due to the project’s current sco
 ---
 
 ## **📦 Installation**
-### **1️⃣ Clone the repository**
-```bash
-git clone <repository_url>
-cd <project_directory>
-```
 
-### **2️⃣ Install dependencies**
+### ** Install dependencies**
 ```bash
 npm install
 ```
