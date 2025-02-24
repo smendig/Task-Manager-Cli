@@ -171,7 +171,7 @@ This project includes **two different approaches to testing**:
 These variables can be configured in a `.env` file at the project's root.
 
 ```
-TASKS_FILE_PATH=.tasks
+TASKS_FILE_PATH=data
 TASKS_FILE_NAME=tasks.json
 ```
 
