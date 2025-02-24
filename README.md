@@ -1,10 +1,10 @@
-
-
-# Task Manager CLI
+# **Task Manager CLI**
 
 This is a command-line task management application built with TypeScript, adhering to clean code principles. It allows users to create, list, update, and delete tasks. Data is persisted to a JSON file.
 
-It is kind of an overkill for a simple application, a simpler architecture would likely have been sufficient but its main purpose is demonstration principles and how the code could be extended or modified in the future. In a **larger application**, the following improvements would be beneficial:
+It is kind of an **overkill** for a simple application, a simpler architecture would likely have been sufficient but its main purpose is to **demonstrate principles** and how the code could be **extended or modified in the future**.  
+
+In a **larger application**, the following improvements would be beneficial:
 
 - **Custom Error Handling** – Implement custom error classes (e.g., `TaskNotFoundError`) to improve error management.
 - **More Edge Cases in Tests** – Validate cases like updating tasks to empty strings or handling unusual characters.
@@ -12,38 +12,34 @@ It is kind of an overkill for a simple application, a simpler architecture would
 
 These were **considered but not implemented** due to the project’s current scope.
 
-## Architecture
+---
+
+## **🛠 Architecture**
 
 - **Core (`src/domain` and `src/application`)**: Business logic and domain models (independent of storage/CLI).
 - **Infrastructure (`src/infrastructure`)**: CLI and file-based persistence (adapters).
 - **Dependency Injection**: `TaskService` depends on `ITaskRepository`, allowing different storage implementations.
 
-## Prerequisites
+---
 
-* Node.js
-* npm
+## **📦 Installation**
+### **1️⃣ Clone the repository**
+```bash
+git clone <repository_url>
+cd <project_directory>
+```
 
-## Installation
+### **2️⃣ Install dependencies**
+```bash
+npm install
+```
 
-1. **Clone the repository:**
+---
 
-    ```bash
-    git clone <repository_url>
-    cd <project_directory>
-    ```
+## **▶ Usage**
+The application runs from the command line.
 
-2. **Install dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-## Usage
-
-The application is run from the command line.
-
-### Running the Application
-
+### **Running the Application**
 ```bash
 npm run dev -- [command] [options]
 ```
@@ -55,62 +51,72 @@ npm run build
 npm run taskcli -- [command] [options]
 ```
 
-### Commands
+---
 
-* **`add`**: Add a new task.
+## **📝 Commands**
+### **1️⃣ Add Task**
+```bash
+npm run dev -- add -t "Task Title" -d "Task Description" --due 2024-12-31
+npm run dev -- add -j -t "Task Title" -d "Task Description" --due 2024-12-31  # JSON output
+```
+| Option | Description |
+|--------|-------------|
+| `-t, --title <title>` | **(Required)** Task title (min. 3 characters). |
+| `-d, --description <description>` | **(Optional)** Task description. |
+| `--due <date>` | **(Required)** Due date (`YYYY-MM-DD`, must be in the future). |
+| `-j, --json` | **(Optional)** Output in JSON format instead of a table. |
 
-    ```bash
-    npm run dev -- add -t "Task Title" -d "Task Description" --due 2024-12-31
-    npm run dev -- add -j -t "Task Title" -d "Task Description" --due 2024-12-31  # JSON output
-    ```
+---
 
-* `-t, --title <title>`:  The title of the task (required, minimum 3 characters).
-* `-d, --description <description>`: The description of the task (required, minimum 5 characters).
-* `--due <date>`: The due date of the task in YYYY-MM-DD format (required, must be in the future).
-* `-j, --json`: Output in JSON format (optional, default is table format).
+### **2️⃣ List Tasks**
+```bash
+npm run dev -- list
+npm run dev -- list -j  # JSON output
+```
 
-* **`list`**: List all tasks.
+| Option | Description |
+|--------|-------------|
+| `-j, --json` | **(Optional)** Output in JSON format. |
 
-    ```bash
-    npm run dev -- list
-    npm run dev -- list -j # JSON output
-    ```
+---
 
-* `-j, --json`: Output in JSON format (optional, default is table format).
+### **3️⃣ Update Task**
+```bash
+npm run dev -- update <task_id> -t "New Title" -d "New Description" --due 2025-01-15 --status Completed
+npm run dev -- update <task_id> -j -t "New Title"  # JSON output, update only title
+```
 
-* **`update <id>`**: Update an existing task.
+| Option | Description |
+|--------|-------------|
+| `<id>` | **(Required)** Task ID. |
+| `-t, --title <title>` | **(Optional)** New task title. |
+| `-d, --description <description>` | **(Optional)** New description. |
+| `--due <date>` | **(Optional)** New due date (`YYYY-MM-DD`). |
+| `--status <status>` | **(Optional)** Task status (`Pending` or `Completed`). |
+| `-j, --json` | **(Optional)** Output in JSON format. |
 
-    ```bash
-    npm run dev -- update <task_id> -t "New Title" -d "New Description" --due 2025-01-15 --status Completed
-    npm run dev -- update <task_id> -j -t "New Title"  # JSON output, update only title
-    ```
+---
 
-* `<id>`: The ID of the task to update (required).
-* `-t, --title <title>`: The new title of the task (optional).
-* `-d, --description <description>`: The new description of the task (optional).
-* `--due <date>`: The new due date of the task in YYYY-MM-DD format (optional).
-* `--status <status>`: The new status of the task (Pending or Completed) (optional).
-* `-j, --json`: Output in JSON format.
+### **4️⃣ Delete Task**
+```bash
+npm run dev -- delete <task_id>
+npm run dev -- delete <task_id> -j  # JSON output
+```
 
-* **`delete <id>`**: Delete a task.
+| Option | Description |
+|--------|-------------|
+| `<id>` | **(Required)** Task ID to delete. |
+| `-j, --json` | **(Optional)** Output in JSON format. |
 
-    ```bash
-    npm run dev -- delete <task_id>
-    npm run dev -- delete <task_id> -j  # JSON output
-    ```
+---
 
-* `<id>`: The ID of the task to delete (required).
-* `-j, --json`: Output in JSON format.
-
-## Project Structure
-
+## **📂 Project Structure**
 ```
 ├── README.md
 ├── eslint.config.mjs
 ├── jest.config.ts
 ├── package-lock.json
 ├── package.json
-├── rclone.sh
 ├── src/
 │   ├── application/
 │   │   └── TaskService.ts
@@ -132,15 +138,36 @@ npm run taskcli -- [command] [options]
 └── tsconfig.json
 ```
 
+---
 
-## Running Tests
-
+## **🧪 Running Tests**
 ```bash
 npm test
 ```
 
-## Environment Variables
+---
 
+## **🔬 Testing Approach**
+This project includes **two different approaches to testing**:
+
+### **1️⃣ Integration Tests (CLI Execution)**
+- **Directly calls the CLI using `exec` in Jest tests**.
+- **No mocking** – Uses **real execution** to validate full program behavior.
+- **Custom test environment (`tests/.env.test`)** ensures:
+  - A **separate JSON file is used for test data**.
+  - No interference with actual user data.
+- **Jest `setupFiles`** is used to load the `.env.test` config.
+
+---
+
+### **2️⃣ Unit Tests (Mocked Dependencies)**
+- **Mocks the repository (`jest.Mocked<ITaskRepository>`)**.
+- **Injects mocked repository** into `TaskService`.
+- Focuses on **business logic** without interacting with the actual storage.
+
+---
+
+## **⚙ Environment Variables**
 These variables can be configured in a `.env` file at the project's root.
 
 ```
@@ -148,4 +175,4 @@ TASKS_FILE_PATH=.tasks
 TASKS_FILE_NAME=tasks.json
 ```
 
-The test environment variables are located at `tests/.env.test`
+For tests, a **separate environment file** (`tests/.env.test`) is used.
