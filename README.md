@@ -2,7 +2,7 @@
 
 This is a command-line task management application built with TypeScript, adhering to clean code principles. It allows users to create, list, update, and delete tasks. Data is persisted to a JSON file.
 
-It is kind of an **overkill** for a simple application, a simpler architecture would likely have been sufficient but its main purpose is to **demonstrate principles** and how the code could be **extended or modified in the future**.  
+The architecture kind of an **overkill** for a simple application, a simpler architecture would likely have been sufficient but its main purpose is to **demonstrate principles** and how the code could be **extended or modified in the future**.  
 
 In a **larger application**, the following improvements would be beneficial:
 
