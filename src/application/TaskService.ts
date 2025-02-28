@@ -24,7 +24,7 @@ export class TaskService {
       dueDate: input.dueDate,
       status: 'Pending',
     });
-    await this.taskRepository.save(TaskSchema.parse(task))
+    await this.taskRepository.save(TaskSchema.parse(task));
     return task;
   }
 
